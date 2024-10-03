@@ -8,18 +8,28 @@ void setUp(void) {}
 
 void tearDown(void) {}
 
-void test_variable_assignment()
+void update_cnt_test_available()
 {
-    int x = 1;
-    TEST_ASSERT_TRUE_MESSAGE(x == 1,"Variable assignment failed.");
+   SemaphoreHandle_t semaphore = xSemaphoreCreateCounting(1, 1);
+   int count = 0;
+    printf("\n The previous count is %d\n",count);
+   int result = updateCount(1,&count,semaphore);
+
+     printf("\n The incremented count is %d\n",count);
+   TEST_ASSERT_EQUAL_INT16_MESSAGE(pdTRUE,result, "The updateCounter func did not run");
+   TEST_ASSERT_EQUAL_INT16_MESSAGE(1,count,"The counter did not increment");
 }
 
-void test_multiplication(void)
+void update_cnt_test_unavailable()
 {
-    int x = 30;
-    int y = 6;
-    int z = x / y;
-    TEST_ASSERT_TRUE_MESSAGE(z == 5, "Multiplication of two integers returned incorrect value.");
+   SemaphoreHandle_t semaphore = xSemaphoreCreateCounting(1, 1);
+   int count = 0;
+    printf("\n The previous count is %d\n",count);
+   int result = updateCount(1,&count,semaphore);
+
+     printf("\n The incremented count is %d\n",count);
+   TEST_ASSERT_EQUAL_INT16_MESSAGE(pdFalse,result, "The updateCounter func did run");
+   TEST_ASSERT_EQUAL_INT16_MESSAGE(0,count,"The counter did increment");
 }
 
 int main (void)
@@ -31,8 +41,8 @@ int main (void)
         //sleep_ms(5000); // Give time for TTY to attach.
         printf("Start tests\n");
         UNITY_BEGIN();
-        RUN_TEST(test_variable_assignment);
-        RUN_TEST(test_multiplication);
+        RUN_TEST(update_cnt_test_available);
+        RUN_TEST(update_cnt_test_unavailable);
         //sleep_ms(5000);
         UNITY_END();
     }
