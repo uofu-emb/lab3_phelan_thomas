@@ -37,9 +37,35 @@ void update_cnt_test_unavailable()
    TEST_ASSERT_EQUAL_INT16_MESSAGE(0,count,"The counter did increment");
 }
 
+#define FIRST_TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
+#define FIRST_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
+
+#define SEC_TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
+#define SEC_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
+
 void testLock(void)
 {
-    
+  SemaphoreHandle_t first_semaphore = xSemaphoreCreateCounting(1, 1);
+  SemaphoreHandle_t sec_semaphore = xSemaphoreCreateCounting(1, 1);
+  TaskHandle_t first_handle, sec_handle;
+  struct DeadlockArgs first_args= {first_semaphore,sec_semaphore,0,'f'};
+  struct DeadlockArgs sec_args= {sec_semaphore,first_semaphore,10,'s'};
+
+  xTaskCreate(deadlock,"f",FIRST_TASK_STACK_SIZE,&first_args,FIRST_TASK_PRIORITY,&first_handle);
+  xTaskCreate(deadlock,"s",SEC_TASK_STACK_SIZE,&sec_args,SEC_TASK_PRIORITY,&sec_handle);
+
+  printf("creating delay for deadlock");
+  vTaskDelay(500);
+  printf("waited for 500ms");
+
+  TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(first_semaphore), 0);
+  TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(sec_semaphore), 0);
+  TEST_ASSERT_EQUAL_INT(2, first_args.counter);
+  TEST_ASSERT_EQUAL_INT(12, sec_args.counter);
+
+  vTaskDelete(first_handle);
+  vTaskDelete(sec_handle);
+  printf("killed both threads");
 }
 
 int main (void)
