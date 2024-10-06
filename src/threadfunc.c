@@ -3,9 +3,9 @@
 #include <threadfunc.h>
 
 
-int updateCounter(const char thread_val, int *counter, SemaphoreHandle_t semaphore)
+int updateCounter(const char *thread_val, int *counter, SemaphoreHandle_t semaphore)
 {
-    if (xSemaphoreTake(semaphore, 250) == pdFALSE) 
+    if (xSemaphoreTake(semaphore, 10) == pdFALSE) 
         {
         return pdFALSE;
         }

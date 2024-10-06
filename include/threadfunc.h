@@ -6,7 +6,7 @@
 #include <pico/multicore.h>
 #include <pico/cyw43_arch.h>
 
-int updateCounter(const char thread_val, int *counter, SemaphoreHandle_t semaphore);
+int updateCounter(const char *thread_val, int *counter, SemaphoreHandle_t semaphore);
 
 struct DeadlockArgs
 {
