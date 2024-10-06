@@ -41,3 +41,19 @@ void deadlock(void *args)
     xSemaphoreGive(dargs->a);
     vTaskSuspend(NULL);
 }
+
+void orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
+{
+    if (xSemaphoreTake(semaphore, 10) == pdFALSE) 
+        {
+        return pdFALSE;
+        }
+    (*counter++);
+    
+    if ((*counter) % 2) {
+        return 0;
+    }
+    printf("Count %d\n", counter);
+    xSemaphoreGive(semaphore);
+    return pdTRUE;  
+}       
