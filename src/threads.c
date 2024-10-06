@@ -5,7 +5,11 @@
 #include <pico/stdlib.h>
 #include <pico/multicore.h>
 #include <pico/cyw43_arch.h>
+<<<<<<< HEAD
 #include <threadfunc.h>
+=======
+#include <threadfunc.H>
+>>>>>>> add174a718f8181010ba56ad9a22d50c3cd34b16
 
 #define MAIN_TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
 #define MAIN_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
