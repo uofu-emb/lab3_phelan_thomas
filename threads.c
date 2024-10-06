@@ -22,9 +22,11 @@ void side_thread(void *params)
 	while (1) {
         vTaskDelay(100);
         //count is incremented by side thread
+        xSemaphoreTake(&semaphore, portMAX_DELAY);
         {
             counter += counter + 1;
         }
+        xSemaphoreGive(&semaphore);
         //print statements are not thread safe
 		printf("hello world from %s! Count %d\n", "thread", counter);
 	}
