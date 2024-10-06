@@ -32,6 +32,11 @@ void update_cnt_test_unavailable()
    TEST_ASSERT_EQUAL_INT16_MESSAGE(0,count,"The counter did increment");
 }
 
+void testLock(void)
+{
+    
+}
+
 int main (void)
 {
     stdio_init_all();
