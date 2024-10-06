@@ -7,3 +7,10 @@
 #include <pico/cyw43_arch.h>
 
 int updateCounter(const char thread_val, int *counter, SemaphoreHandle_t semaphore);
+
+struct DeadlockArgs
+{
+    SemaphoreHandle_t a, b;
+    int counter;
+    char id;
+};

@@ -4,6 +4,11 @@
 #include <unity.h>
 #include "unity_config.h"
 
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "task.h"
+#include "threadfunc.h"
+
 void setUp(void) {}
 
 void tearDown(void) {}
@@ -13,7 +18,7 @@ void update_cnt_test_available()
    SemaphoreHandle_t semaphore = xSemaphoreCreateCounting(1, 1);
    int count = 0;
     printf("\n The previous count is %d\n",count);
-   int result = updateCount(1,&count,semaphore);
+   int result = updateCounter(1,&count,semaphore);
 
      printf("\n The incremented count is %d\n",count);
    TEST_ASSERT_EQUAL_INT16_MESSAGE(pdTRUE,result, "The updateCounter func did not run");
@@ -25,10 +30,10 @@ void update_cnt_test_unavailable()
    SemaphoreHandle_t semaphore = xSemaphoreCreateCounting(1, 1);
    int count = 0;
     printf("\n The previous count is %d\n",count);
-   int result = updateCount(1,&count,semaphore);
+   int result = updateCounter(1,&count,semaphore);
 
      printf("\n The incremented count is %d\n",count);
-   TEST_ASSERT_EQUAL_INT16_MESSAGE(pdFalse,result, "The updateCounter func did run");
+   TEST_ASSERT_EQUAL_INT16_MESSAGE(pdFALSE,result, "The updateCounter func did run");
    TEST_ASSERT_EQUAL_INT16_MESSAGE(0,count,"The counter did increment");
 }
 
