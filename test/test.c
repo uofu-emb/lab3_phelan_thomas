@@ -46,6 +46,7 @@ void update_cnt_test_unavailable()
 
 void testLock(void)
 {
+  printf("intestlock");
   SemaphoreHandle_t first_semaphore = xSemaphoreCreateCounting(1, 1);
   SemaphoreHandle_t sec_semaphore = xSemaphoreCreateCounting(1, 1);
   TaskHandle_t first_handle, sec_handle;
@@ -69,6 +70,7 @@ void testLock(void)
   printf("killed both threads");
 }
 
+
 int main (void)
 {
     stdio_init_all();
@@ -80,6 +82,7 @@ int main (void)
         UNITY_BEGIN();
         RUN_TEST(update_cnt_test_available);
         RUN_TEST(update_cnt_test_unavailable);
+        //RUN_TEST(testLock);
         //sleep_ms(5000);
         UNITY_END();
     }
