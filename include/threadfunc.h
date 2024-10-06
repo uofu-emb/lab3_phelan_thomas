@@ -14,3 +14,5 @@ struct DeadlockArgs
     int counter;
     char id;
 };
+
+void deadlock(void *);
