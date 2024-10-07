@@ -44,13 +44,14 @@ void deadlock(void *args)
 
 int orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
 {
-    if (xSemaphoreTake(semaphore, 1000) == pdFALSE) 
+    if (xSemaphoreTake(semaphore, 500) == pdFALSE) 
     {
         return pdFALSE;
     }
-    (*counter++);
-    if ((*counter) % 2) {
-        return 0;
+    (*counter)++;
+    if ((*counter) % 2) 
+    {
+        return pdFALSE;
     }
     printf("Count %d\n", counter);
     xSemaphoreGive(semaphore);
