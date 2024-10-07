@@ -83,8 +83,8 @@ void orphaned_test()
 
   result = orphaned_lock(semaphore,&counter);
     TEST_ASSERT_EQUAL_INT(3, counter);
-    TEST_ASSERT_EQUAL_INT(pdTRUE, result);
-    TEST_ASSERT_EQUAL_INT(1, uxSemaphoreGetCount(semaphore));
+    TEST_ASSERT_EQUAL_INT(pdFALSE, result);
+    TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
 }
 
