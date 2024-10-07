@@ -58,6 +58,7 @@ void testLock(void)
 
   printf("creating delay for deadlock");
   vTaskDelay(1000);
+  vTaskSuspend(NULL);
   printf("waited for 1000 ticks");
 
   TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(first_semaphore), 0);
