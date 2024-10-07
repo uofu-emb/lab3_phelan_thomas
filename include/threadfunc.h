@@ -10,7 +10,7 @@ int updateCounter(const char *thread_val, int *counter, SemaphoreHandle_t semaph
 
 struct DeadlockArgs
 {
-    SemaphoreHandle_t a, b;
+    SemaphoreHandle_t f, s;
     int counter;
     char id;
 };
