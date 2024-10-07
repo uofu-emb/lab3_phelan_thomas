@@ -45,11 +45,10 @@ void deadlock(void *args)
 void orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
 {
     if (xSemaphoreTake(semaphore, 10) == pdFALSE) 
-        {
+    {
         return pdFALSE;
-        }
+    }
     (*counter++);
-    
     if ((*counter) % 2) {
         return 0;
     }

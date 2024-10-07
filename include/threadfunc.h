@@ -16,3 +16,4 @@ struct DeadlockArgs
 };
 
 void deadlock(void *);
+int orphaned_lock(SemaphoreHandle_t semaphore, int *counter);
