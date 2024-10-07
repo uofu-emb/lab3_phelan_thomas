@@ -1,3 +1,7 @@
+# Lab 3 Threading
+[![CMake](https://github.com/uofu-emb/lab3_phelan_thomas/actions/workflows/main.yml/badge.svg)](https://github.com/uofu-emb/lab3_phelan_thomas/actions/workflows/main.yml)
+[![CMake](https://github.com/uofu-emb/lab3_phelan_thomas/actions/workflows/main.yml/badge.svg?branch=dev)](https://github.com/uofu-emb/lab3_phelan_thomas/actions/workflows/main.yml)
+
 # Renode setup
 The Raspberry Pico needs configuration files for Renode to work properly.
 
