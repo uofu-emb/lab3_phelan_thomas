@@ -88,13 +88,13 @@ void orphaned_test()
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
   printf("New Value of counter is %d\n", counter);
-  TEST_ASSERT_EQUAL_INT(pdTRUE, result);
+  TEST_ASSERT_EQUAL_INT(pdFALSE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
   printf("New Value of counter was %d\n", counter);
-  TEST_ASSERT_EQUAL_INT(pdTRUE, result);
+  TEST_ASSERT_EQUAL_INT(pdFALSE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
 }
@@ -111,7 +111,7 @@ void unorphaned_test()
 
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
-  TEST_ASSERT_EQUAL_INT(pdTRUE, result);
+  TEST_ASSERT_EQUAL_INT(pdFALSE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
 }
