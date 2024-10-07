@@ -58,13 +58,15 @@ void testLock(void)
 
   printf("creating delay for deadlock");
   vTaskDelay(1000);
-  vTaskSuspend(NULL);
   printf("waited for 1000 ticks");
 
   TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(first_semaphore), 0);
   TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(sec_semaphore), 0);
   TEST_ASSERT_EQUAL_INT(2, first_args.counter);
   TEST_ASSERT_EQUAL_INT(12, sec_args.counter);
+
+  vTaskSuspend(first_handle);  // Suspend Task 1
+  vTaskSuspend(sec_handle);    // Suspend Task 2
 
   vTaskDelete(first_handle);
   vTaskDelete(sec_handle);
