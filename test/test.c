@@ -127,7 +127,7 @@ int main (void)
         UNITY_BEGIN();
         RUN_TEST(update_cnt_test_available);
         RUN_TEST(update_cnt_test_unavailable);
-        //RUN_TEST(testLock);
+        RUN_TEST(testLock);
         RUN_TEST(orphaned_test);
         RUN_TEST(unorphaned_test);
         //sleep_ms(5000);
