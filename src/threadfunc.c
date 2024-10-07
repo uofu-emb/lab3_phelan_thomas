@@ -23,22 +23,22 @@ void deadlock(void *args)
 {
     struct DeadlockArgs *dargs = (struct DeadlockArgs *)args;
 
-    printf("\tinside deadlock %c\n", dargs->id);
+    printf("\tBegin deadlock %c\n", dargs->id);
     dargs->counter++;
-    xSemaphoreTake(dargs->a, portMAX_DELAY);
+    xSemaphoreTake(dargs->f, portMAX_DELAY);
     {
         dargs->counter++;
         printf("\tinside first lock %c\n", dargs->id);
         vTaskDelay(100);
         printf("\tpost-delay %c\n", dargs->id);
-        xSemaphoreTake(dargs->b, portMAX_DELAY);
+        xSemaphoreTake(dargs->s, portMAX_DELAY);
         {
             printf("\tinside second lock %c\n", dargs->id);
             dargs->counter++;
         }
-        xSemaphoreGive(dargs->b);
+        xSemaphoreGive(dargs->s);
     }
-    xSemaphoreGive(dargs->a);
+    xSemaphoreGive(dargs->f);
     vTaskSuspend(NULL);
 }
 

@@ -57,8 +57,8 @@ void testLock(void)
   xTaskCreate(deadlock,"s",SEC_TASK_STACK_SIZE,&sec_args,SEC_TASK_PRIORITY,&sec_handle);
 
   printf("creating delay for deadlock");
-  vTaskDelay(500);
-  printf("waited for 500ms");
+  vTaskDelay(1000);
+  printf("waited for 1000 ticks");
 
   TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(first_semaphore), 0);
   TEST_ASSERT_EQUAL_INT(uxSemaphoreGetCount(sec_semaphore), 0);
