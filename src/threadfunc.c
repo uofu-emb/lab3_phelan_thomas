@@ -51,6 +51,7 @@ int orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
     (*counter)++;
     if ((*counter) % 2) 
     {
+        xSemaphoreGive(semaphore);
         return pdFALSE;
     }
     printf("Count %d\n", counter);
