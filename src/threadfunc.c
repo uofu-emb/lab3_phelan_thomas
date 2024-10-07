@@ -42,9 +42,9 @@ void deadlock(void *args)
     vTaskSuspend(NULL);
 }
 
-void orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
+int orphaned_lock(SemaphoreHandle_t semaphore, int *counter)
 {
-    if (xSemaphoreTake(semaphore, 10) == pdFALSE) 
+    if (xSemaphoreTake(semaphore, 1000) == pdFALSE) 
     {
         return pdFALSE;
     }
