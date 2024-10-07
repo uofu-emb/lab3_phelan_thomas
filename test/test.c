@@ -72,11 +72,14 @@ void testLock(void)
 
 void orphaned_test()
 {
-  rintf("Starting orphaned test");
+  printf("Starting orphaned test\n");
   int counter = 1;
+  printf("Value of counter was %d", counter)
   SemaphoreHandle_t semaphore = xSemaphoreCreateCounting(1,1);
   int result = orphaned_lock(semaphore, &counter);
   TEST_ASSERT_EQUAL_INT(2,counter);
+  printf("New Value of counter is %d\n", counter)
+
   TEST_ASSERT_EQUAL_INT(pdTRUE,result);
   TEST_ASSERT_EQUAL_INT(1, uxSemaphoreGetCount(semaphore));
 
@@ -84,11 +87,13 @@ void orphaned_test()
 
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
+  printf("New Value of counter is %d\n", counter)
   TEST_ASSERT_EQUAL_INT(pdTRUE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
+  printf("New Value of counter was %d\n", counter)
   TEST_ASSERT_EQUAL_INT(pdTRUE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
