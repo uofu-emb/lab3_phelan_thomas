@@ -93,6 +93,7 @@ void orphaned_test()
   TEST_ASSERT_EQUAL_INT(pdFALSE, result);
   TEST_ASSERT_EQUAL_INT(0, uxSemaphoreGetCount(semaphore));
 
+  // redundant test to verify counter
   result = orphaned_lock(semaphore,&counter);
   TEST_ASSERT_EQUAL_INT(3, counter);
   printf("New Value of counter was %d\n", counter);
